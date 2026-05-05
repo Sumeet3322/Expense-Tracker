@@ -13,7 +13,7 @@ const app = express();
 // Middleware to handle CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*", 
+    origin: "*", 
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], 
   })
@@ -22,6 +22,11 @@ app.use(
 app.use(express.json());
 
 connectDB();
+
+// Health Check Route
+app.get("/api/v1/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Backend is running" });
+});
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
