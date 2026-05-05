@@ -23,6 +23,10 @@ app.use(express.json());
 
 connectDB();
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Xpensify Backend is Running" });
+});
+
 // Health Check Route
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({ status: "ok", message: "Backend is running" });
